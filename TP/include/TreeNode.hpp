@@ -10,10 +10,9 @@ class TreeNode{
 		MsgContainer data;
 		TreeNode* leftPtr;
 		TreeNode* rightPtr;
-		TreeNode* parentPtr;
 		int height;
 	public:
-		TreeNode(MsgContainer dataInput) : data(dataInput), leftPtr(nullptr), rightPtr(nullptr), height(0) {}
+		TreeNode(MsgContainer dataInput) : data(dataInput), leftPtr(nullptr), rightPtr(nullptr), height(1) {}
 		MsgContainer getData() { return data; }
 		void setHeight(int H) { height = H; }
 	friend class BinarySearchTree;

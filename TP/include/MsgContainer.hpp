@@ -26,15 +26,16 @@ class MsgContainer{
 		int getNumberOfWords() const { return numberOfWords; }
 		string getMensagem() const { return mensagem; }
 
-		void printMsg();
+		void printMsg(){ cout << destinatario << " " << messageID << ": " << mensagem << endl; }
+		
+		friend std::ostream& operator<<(std::ostream& os, const MsgContainer& obj){ 
+			os << obj.getDestinatario() << " " << obj.getMessageID() << ": " << obj.getMensagem() << endl;
+			return os;
+		}
 
 		bool operator<(const MsgContainer& outro) const { return getMessageID() < outro.getMessageID(); }
 		bool operator>(const MsgContainer& outro) const { return getMessageID() > outro.getMessageID(); }
-		bool operator==(const MsgContainer& outro) const { return getMessageID() == outro.getMessageID(); }
+		bool operator==(const MsgContainer& outro) const { return getMessageID() == outro.getMessageID() && getDestinatario() == outro.getDestinatario(); }
 };
-
-void MsgContainer::printMsg(){
-	cout << destinatario << " " << messageID << ": " << mensagem << endl;
-}
 
 #endif
