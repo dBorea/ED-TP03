@@ -19,3 +19,10 @@ MsgContainer Hash::consult(MsgContainer dataInput){
 		return temp->getData();
 	return MsgContainer(dataInput.getDestinatario(), dataInput.getMessageID(), 0, "MENSAGEM INEXISTENTE");
 }
+
+bool Hash::hasElement(MsgContainer dataInput){
+	int index = hashFunction(dataInput.getDestinatario());
+	if(table[index].searchNode(dataInput))
+		return true;
+	return false;
+}

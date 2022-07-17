@@ -15,6 +15,7 @@ class Hash{
 		int hashFunction(int U) { return (U % lenghtOfTable); }
 		void insert(MsgContainer);
 		bool remove(MsgContainer);
+		bool hasElement(MsgContainer);
 		MsgContainer consult(MsgContainer);
 };
 

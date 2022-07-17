@@ -12,5 +12,6 @@
 		"iosfwd": "cpp",
 		"iostream": "cpp",
 		"new": "cpp"
-	}
+	},
+	"workbench.colorTheme": "Monokai Pro (Filter Spectrum)"
 }

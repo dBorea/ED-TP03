@@ -76,8 +76,10 @@ void readMailLogFile(std::ifstream& inputFile, std::ofstream& outputFile){
 		}
 		else if(tempString == "APAGA"){
 			linhaAtual >> destiny >> msgID;
-			if(hashTree.remove(MsgContainer(destiny, msgID)))
+			if(hashTree.hasElement(MsgContainer(destiny, msgID))){
+				hashTree.remove(MsgContainer(destiny, msgID));
 				outputFile << "OK: MENSAGEM APAGADA" << endl;
+			}
 			else
 				outputFile << "ERRO: MENSAGEM INEXISTENTE" << endl;
 		}

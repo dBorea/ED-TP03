@@ -11,7 +11,7 @@ OBJS = $(OBJ)/memlog.o $(OBJ)/mailingSistem.o $(OBJ)/Hash.o $(OBJ)/BST.o
 HDRS = $(INC)/msgassert.hpp $(INC)/memlog.hpp $(INC)/MsgContainer.hpp $(INC)/TreeNode.hpp $(INC)/BST.hpp $(INC)/Hash.hpp
 
 SANITIZE = -fsanitize=undefined,address -static-libasan
-LDFLAGS =  -g 
+LDFLAGS =  -g
 CXXFLAGS = -Wall -c -I$(INC) $(LDFLAGS) 
 
 CMP = make -C $(TEMP) compare -s
