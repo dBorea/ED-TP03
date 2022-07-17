@@ -3,7 +3,7 @@
 
 #include "MsgContainer.hpp"
 
-class BinarySearchTree;
+class AVLTree;
 
 class TreeNode{
 	private:
@@ -15,7 +15,7 @@ class TreeNode{
 		TreeNode(MsgContainer dataInput) : data(dataInput), leftPtr(nullptr), rightPtr(nullptr), height(1) {}
 		MsgContainer getData() { return data; }
 		void setHeight(int H) { height = H; }
-	friend class BinarySearchTree;
+	friend class AVLTree;
 };
 
 #endif

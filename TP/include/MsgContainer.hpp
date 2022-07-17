@@ -35,6 +35,8 @@ class MsgContainer{
 
 		bool operator<(const MsgContainer& outro) const { return getMessageID() < outro.getMessageID(); }
 		bool operator>(const MsgContainer& outro) const { return getMessageID() > outro.getMessageID(); }
+		bool operator<=(const MsgContainer& outro) const { return getMessageID() <= outro.getMessageID(); }
+		bool operator>=(const MsgContainer& outro) const { return getMessageID() >= outro.getMessageID(); }
 		bool operator==(const MsgContainer& outro) const { return getMessageID() == outro.getMessageID() && getDestinatario() == outro.getDestinatario(); }
 };
 

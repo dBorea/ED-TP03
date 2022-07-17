@@ -1,35 +1,35 @@
-#include "BST.hpp"
+#include "AVL.hpp"
 
 int max(int a, int b){
 	return (a > b)? a : b;
 }
 
-TreeNode* BinarySearchTree::rotateRight(TreeNode* currentNode){
-	TreeNode *XNode = currentNode->leftPtr;
-	TreeNode *XYNode = XNode->rightPtr;
-	XNode->rightPtr = currentNode;
-	currentNode->leftPtr = XYNode;
+TreeNode* AVLTree::rotateRight(TreeNode* currentNode){
+	TreeNode *newHead = currentNode->leftPtr;
+	currentNode->leftPtr = newHead->rightPtr;
+	newHead->rightPtr = currentNode;
 	currentNode->setHeight(1 + max(height(currentNode->rightPtr), height(currentNode->leftPtr)));
-	XNode->setHeight(1 + max(height(XNode->rightPtr), height(XNode->leftPtr)));
-	return XNode;
+	newHead->setHeight(1 + max(height(newHead->rightPtr), height(newHead->leftPtr)));
+	return newHead;
 }
 
-TreeNode* BinarySearchTree::rotateLeft(TreeNode* currentNode){
-	TreeNode *YNode = currentNode->rightPtr;
-	TreeNode *YXNode = YNode->leftPtr;
-	YNode->leftPtr = currentNode;
-	currentNode->rightPtr = YXNode;
-	currentNode->setHeight(1 + max(height(currentNode->rightPtr), height(currentNode->leftPtr)));
-	YNode->setHeight(1 + max(height(YNode->rightPtr), height(YNode->leftPtr)));
-	return YNode;
+TreeNode* AVLTree::rotateLeft(TreeNode* currentNode){
+	TreeNode *newHead = currentNode->rightPtr;
+	currentNode->rightPtr = newHead->leftPtr;
+	newHead->leftPtr = currentNode;
+	currentNode->setHeight(1 + max(height(currentNode->leftPtr), height(currentNode->rightPtr)));
+	newHead->setHeight(1 + max(height(newHead->leftPtr), height(newHead->rightPtr)));
+	return newHead;
 }
 
-void BinarySearchTree::insertNewNode(MsgContainer dataInput){
+void AVLTree::insertNewNode(MsgContainer dataInput){
 	raiz = insert_recursive(raiz, dataInput);
 }
 
-TreeNode* BinarySearchTree::insert_recursive(TreeNode* currentNode, MsgContainer dataInput){
+TreeNode* AVLTree::insert_recursive(TreeNode* currentNode, MsgContainer dataInput){
 	if(currentNode == nullptr){
+		// cout << "NOVO ELEMENTO:";
+		// dataInput.printMsg();
 		TreeNode* newNode = new TreeNode(dataInput);
 		return newNode;
 	}
@@ -46,7 +46,7 @@ TreeNode* BinarySearchTree::insert_recursive(TreeNode* currentNode, MsgContainer
 	int balance = getBalance(currentNode);
 
 	// Caso esquerda->esquerda
-	if(balance > 1 && dataInput < currentNode->leftPtr->data)
+	if(balance > 1 && dataInput <= currentNode->leftPtr->data)
 		return rotateRight(currentNode);
 	
 	// Caso esquerda->direita
@@ -56,7 +56,7 @@ TreeNode* BinarySearchTree::insert_recursive(TreeNode* currentNode, MsgContainer
 	}
 
 	// Caso direita->direita
-	else if(balance < -1 && dataInput > currentNode->rightPtr->data)
+	else if(balance < -1 && dataInput >= currentNode->rightPtr->data)
 		return rotateLeft(currentNode);
 	
 	// Caso direita->esquerda
@@ -68,11 +68,11 @@ TreeNode* BinarySearchTree::insert_recursive(TreeNode* currentNode, MsgContainer
 	return currentNode;
 }
 
-TreeNode* BinarySearchTree::searchNode(MsgContainer dataChave){
+TreeNode* AVLTree::searchNode(MsgContainer dataChave){
 	return search_recursive(raiz, dataChave);
 }
 
-TreeNode* BinarySearchTree::search_recursive(TreeNode* currentNode, MsgContainer dataChave){
+TreeNode* AVLTree::search_recursive(TreeNode* currentNode, MsgContainer dataChave){
 	if(currentNode == nullptr)
 		return nullptr;
 	
@@ -85,53 +85,47 @@ TreeNode* BinarySearchTree::search_recursive(TreeNode* currentNode, MsgContainer
 	return nullptr;
 }
 
-TreeNode* BinarySearchTree::deleteNode(MsgContainer dataChave){
-	return delete_recursive(raiz, dataChave);
+void AVLTree::deleteNode(MsgContainer dataChave){
+	raiz = delete_recursive(raiz, dataChave);
 }
 
-TreeNode* BinarySearchTree::minValueNode(TreeNode* origin){
+TreeNode* AVLTree::minValueNode(TreeNode* origin){
 	TreeNode* currentNode = origin;
 	for(; currentNode->leftPtr != nullptr ;)
 		currentNode = currentNode->leftPtr;
 	return currentNode;
 }
 
-TreeNode* BinarySearchTree::maxValueNode(TreeNode* origin){
+TreeNode* AVLTree::maxValueNode(TreeNode* origin){
 	TreeNode* currentNode = origin;
 	for(; currentNode->rightPtr != nullptr ;)
 		currentNode = currentNode->rightPtr;
 	return currentNode;
 }
 
-TreeNode* BinarySearchTree::delete_recursive(TreeNode* &currentNode, MsgContainer dataChave){
-	if(currentNode == nullptr) return currentNode;
-	else if(dataChave < currentNode->data) currentNode->leftPtr = delete_recursive(currentNode->leftPtr, dataChave);
+TreeNode* AVLTree::delete_recursive(TreeNode* &currentNode, MsgContainer dataChave){
+	if(currentNode == nullptr) return nullptr;
+		 if(dataChave < currentNode->data) currentNode->leftPtr = delete_recursive(currentNode->leftPtr, dataChave);
 	else if(dataChave > currentNode->data) currentNode->rightPtr = delete_recursive(currentNode->rightPtr, dataChave);	
-	else if(dataChave == currentNode->data){
-		if(currentNode->leftPtr == nullptr && currentNode->rightPtr == nullptr){
+	else {
+		TreeNode *tempRight = currentNode->rightPtr;
+		if(currentNode->rightPtr == nullptr){
+			TreeNode *tempLeft = currentNode->leftPtr;
 			delete currentNode;
-			currentNode = nullptr;
+			currentNode = tempLeft;
 		}
 		else if(currentNode->leftPtr == nullptr){
-			TreeNode *temp = currentNode;
-			currentNode = currentNode->rightPtr;
-			delete temp;
-		}
-		else if(currentNode->rightPtr == nullptr){
-			TreeNode *temp = currentNode;
-			currentNode = currentNode->leftPtr;
-			delete temp;
+			delete currentNode;
+			currentNode = tempRight;
 		}
 		else {
-			TreeNode *temp = minValueNode(currentNode->rightPtr);
-			currentNode->data = temp->data;
-			currentNode->rightPtr = delete_recursive(currentNode->rightPtr, temp->data);
+			tempRight = minValueNode(tempRight);
+			currentNode->data = tempRight->data;
+			currentNode->rightPtr = delete_recursive(currentNode->rightPtr, tempRight->data);
 		}
 	}
-	else return currentNode;
 
-	if(currentNode == nullptr)
-		return nullptr;
+	if(currentNode == nullptr) return nullptr;
 	
 	currentNode->setHeight(1 + max(height(currentNode->rightPtr), height(currentNode->leftPtr)));
 	int balance = getBalance(currentNode);
@@ -159,14 +153,16 @@ TreeNode* BinarySearchTree::delete_recursive(TreeNode* &currentNode, MsgContaine
 	return currentNode;
 }
 
-void BinarySearchTree::destroy_recursive(TreeNode* currentNode){
+void AVLTree::destroy_recursive(TreeNode* currentNode){
 	if(currentNode){
 		destroy_recursive(currentNode->leftPtr);
 		destroy_recursive(currentNode->rightPtr);
+		// cout << "DELETANDO ELEMENTO:";
+		// currentNode->data.printMsg();
 		delete currentNode;
 	}
 }
 
-void BinarySearchTree::destroy(){
+void AVLTree::destroy(){
 	destroy_recursive(raiz);
 }

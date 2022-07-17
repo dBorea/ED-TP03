@@ -1,11 +1,11 @@
-#ifndef BINARY_SEARCH_TREE_H
-#define BINARY_SEARCH_TREE_H
+#ifndef AVL_TREE_H
+#define AVL_TREE_H
 
 #include "TreeNode.hpp"
 
 class Hash;
 
-class BinarySearchTree{
+class AVLTree{
 	private:
 		TreeNode *raiz;
 
@@ -29,11 +29,11 @@ class BinarySearchTree{
 		}
 
 	public:
-		BinarySearchTree() : raiz(nullptr) {}
-		~BinarySearchTree() { destroy(); }
+		AVLTree() : raiz(nullptr) {}
+		~AVLTree() { destroy(); }
 		void insertNewNode(MsgContainer);
+		void deleteNode(MsgContainer);
 		TreeNode* searchNode(MsgContainer);
-		TreeNode* deleteNode(MsgContainer);
 
 	friend class Hash;
 };

@@ -5,11 +5,9 @@ void Hash::insert(MsgContainer dataInput){
 	table[index].insertNewNode(dataInput);
 }
 
-bool Hash::remove(MsgContainer dataInput){
+void Hash::remove(MsgContainer dataInput){
 	int index = hashFunction(dataInput.getDestinatario());
-	if(table[index].deleteNode(dataInput))
-		return true;
-	return false;
+	table[index].deleteNode(dataInput);
 }
 
 MsgContainer Hash::consult(MsgContainer dataInput){
