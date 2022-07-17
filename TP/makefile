@@ -40,5 +40,11 @@ execute: $(EXE)
 	$(EXE) -i $(TEMP)/entradas/entrada_4.txt -o $(TEMP)/saidas/minha_saida_4.txt
 	$(CMP)
 
+mem: $(EXE)
+	rm -f $(REGMEM)/mail_log.out dataSorterText.out
+	$(EXE) -p $(REGMEM)/mail_log.out -l -i $(TEMP)/entradas/entrada_regmem.txt -o $(TEMP)/saidas/saida_regmem.txt
+	$(ANALISAMEM) -i $(REGMEM)/mail_log.out -p $(REGMEM)/mail_regmem
+	gnuplot $(REGMEM)/*.gp
+
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out

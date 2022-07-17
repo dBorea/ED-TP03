@@ -1,5 +1,6 @@
 #include "AVL.hpp"
 
+
 int max(int a, int b){
 	return (a > b)? a : b;
 }
@@ -34,9 +35,9 @@ TreeNode* AVLTree::insert_recursive(TreeNode* currentNode, MsgContainer dataInpu
 		return newNode;
 	}
 	else {
-		if(dataInput < currentNode->data)
+		if(dataInput < currentNode->getData())
 			currentNode->leftPtr = insert_recursive(currentNode->leftPtr, dataInput);
-		else if(dataInput > currentNode->data)
+		else if(dataInput > currentNode->getData())
 			currentNode->rightPtr = insert_recursive(currentNode->rightPtr, dataInput);
 		else
 			erroAssert(false, "Tentativa de inserir duplicata de elemento já existente.");
@@ -46,21 +47,21 @@ TreeNode* AVLTree::insert_recursive(TreeNode* currentNode, MsgContainer dataInpu
 	int balance = getBalance(currentNode);
 
 	// Caso esquerda->esquerda
-	if(balance > 1 && dataInput <= currentNode->leftPtr->data)
+	if(balance > 1 && dataInput <= currentNode->leftPtr->getData())
 		return rotateRight(currentNode);
 	
 	// Caso esquerda->direita
-	if(balance > 1 && dataInput > currentNode->leftPtr->data){
+	if(balance > 1 && dataInput > currentNode->leftPtr->getData()){
 		currentNode->leftPtr = rotateLeft(currentNode->leftPtr);
 		return rotateRight(currentNode);
 	}
 
 	// Caso direita->direita
-	else if(balance < -1 && dataInput >= currentNode->rightPtr->data)
+	else if(balance < -1 && dataInput >= currentNode->rightPtr->getData())
 		return rotateLeft(currentNode);
 	
 	// Caso direita->esquerda
-	else if(balance < -1 && dataInput < currentNode->rightPtr->data){
+	else if(balance < -1 && dataInput < currentNode->rightPtr->getData()){
 		currentNode->rightPtr = rotateRight(currentNode->rightPtr);
 		return rotateLeft(currentNode);
 	}
@@ -76,11 +77,11 @@ TreeNode* AVLTree::search_recursive(TreeNode* currentNode, MsgContainer dataChav
 	if(currentNode == nullptr)
 		return nullptr;
 	
-	if(dataChave < currentNode->data)
+	if(dataChave < currentNode->getData())
 		return search_recursive(currentNode->leftPtr, dataChave);
-	if(dataChave > currentNode->data)
+	if(dataChave > currentNode->getData())
 		return search_recursive(currentNode->rightPtr, dataChave);
-	if(dataChave == currentNode->data)
+	if(dataChave == currentNode->getData())
 		return currentNode;
 	return nullptr;
 }
@@ -105,8 +106,8 @@ TreeNode* AVLTree::maxValueNode(TreeNode* origin){
 
 TreeNode* AVLTree::delete_recursive(TreeNode* &currentNode, MsgContainer dataChave){
 	if(currentNode == nullptr) return nullptr;
-		 if(dataChave < currentNode->data) currentNode->leftPtr = delete_recursive(currentNode->leftPtr, dataChave);
-	else if(dataChave > currentNode->data) currentNode->rightPtr = delete_recursive(currentNode->rightPtr, dataChave);	
+		 if(dataChave < currentNode->getData()) currentNode->leftPtr = delete_recursive(currentNode->leftPtr, dataChave);
+	else if(dataChave > currentNode->getData()) currentNode->rightPtr = delete_recursive(currentNode->rightPtr, dataChave);	
 	else {
 		TreeNode *tempRight = currentNode->rightPtr;
 		if(currentNode->rightPtr == nullptr){
@@ -120,8 +121,8 @@ TreeNode* AVLTree::delete_recursive(TreeNode* &currentNode, MsgContainer dataCha
 		}
 		else {
 			tempRight = minValueNode(tempRight);
-			currentNode->data = tempRight->data;
-			currentNode->rightPtr = delete_recursive(currentNode->rightPtr, tempRight->data);
+			currentNode->setData(tempRight->getData());
+			currentNode->rightPtr = delete_recursive(currentNode->rightPtr, tempRight->getData());
 		}
 	}
 
@@ -158,7 +159,7 @@ void AVLTree::destroy_recursive(TreeNode* currentNode){
 		destroy_recursive(currentNode->leftPtr);
 		destroy_recursive(currentNode->rightPtr);
 		// cout << "DELETANDO ELEMENTO:";
-		// currentNode->data.printMsg();
+		// currentNode->getData().printMsg();
 		delete currentNode;
 	}
 }
