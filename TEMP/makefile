@@ -1,7 +1,13 @@
 CXX = g++
 SAIDAS = saidas
 
-EXE = comparator.exe
+EXE = comparator
+GENLOAD = genload
+
+all: $(GENLOAD) $(EXE)
+
+$(GENLOAD): genLoad.cpp
+	$(CXX) genLoad.cpp -o $(GENLOAD)
 
 $(EXE): fileComparator.cpp
 	$(CXX) fileComparator.cpp -o $(EXE)

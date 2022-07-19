@@ -40,6 +40,13 @@ execute: $(EXE)
 	$(EXE) -i $(TEMP)/entradas/entrada_4.txt -o $(TEMP)/saidas/minha_saida_4.txt
 	$(CMP)
 
+perfInput: $(EXE)
+	$(EXE) -p $(REGPERF)/input_var100k.out -i $(TEMP)/out_1.txt -o $(TEMP)/saidas/saida_temp.txt
+	$(EXE) -p $(REGPERF)/input_var200k.out -i $(TEMP)/out_2.txt -o $(TEMP)/saidas/saida_temp.txt
+	$(EXE) -p $(REGPERF)/input_var300k.out -i $(TEMP)/out_3.txt -o $(TEMP)/saidas/saida_temp.txt
+	$(EXE) -p $(REGPERF)/input_var400k.out -i $(TEMP)/out_4.txt -o $(TEMP)/saidas/saida_temp.txt
+	$(EXE) -p $(REGPERF)/input_var500k.out -i $(TEMP)/out_5.txt -o $(TEMP)/saidas/saida_temp.txt
+
 mem: $(EXE)
 	rm -f $(REGMEM)/mail_log.out dataSorterText.out
 	$(EXE) -p $(REGMEM)/mail_log.out -l -i $(TEMP)/entradas/entrada_regmem.txt -o $(TEMP)/saidas/saida_regmem.txt
