@@ -1,8 +1,10 @@
 .vscode/
 *.o
 *.exe
-TEMP/
+TEMP/*.txt
+TEMP/entradas/*
+TEMP/saidas/*
+TEMP/regmem/*
+TEMP/regperf/*
 analisamem/
 TP/gmon.out
-TEMP/makefile
-TEMP/comparator.exe
