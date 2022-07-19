@@ -39,8 +39,10 @@ TreeNode* AVLTree::insert_recursive(TreeNode* currentNode, MsgContainer dataInpu
 			currentNode->leftPtr = insert_recursive(currentNode->leftPtr, dataInput);
 		else if(dataInput > currentNode->getData())
 			currentNode->rightPtr = insert_recursive(currentNode->rightPtr, dataInput);
-		else
-			erroAssert(false, "Tentativa de inserir duplicata de elemento já existente.");
+		else{
+			avisoAssert(false, "Tentativa de inserir duplicata de elemento já existente. A execução continuará ignorando este comando.");
+			return nullptr;
+		}
 	}
 
 	currentNode->setHeight(1 + max(height(currentNode->rightPtr), height(currentNode->leftPtr)));

@@ -11,7 +11,7 @@ OBJS = $(OBJ)/memlog.o $(OBJ)/mailingSistem.o $(OBJ)/Hash.o $(OBJ)/AVL.o
 HDRS = $(INC)/msgassert.hpp $(INC)/memlog.hpp $(INC)/MsgContainer.hpp $(INC)/TreeNode.hpp $(INC)/AVL.hpp $(INC)/Hash.hpp
 
 SANITIZE = -fsanitize=undefined,address -static-libasan
-LDFLAGS =  -g $(SANITIZE)
+LDFLAGS =  -pg -O3
 CXXFLAGS = -Wall -c -I$(INC) $(LDFLAGS) 
 
 CMP = make -C $(TEMP) compare -s
@@ -45,6 +45,10 @@ mem: $(EXE)
 	$(EXE) -p $(REGMEM)/mail_log.out -l -i $(TEMP)/entradas/entrada_regmem.txt -o $(TEMP)/saidas/saida_regmem.txt
 	$(ANALISAMEM) -i $(REGMEM)/mail_log.out -p $(REGMEM)/mail_regmem
 	gnuplot $(REGMEM)/*.gp
+
+gprof: $(EXE)
+	$(EXE) -i $(TEMP)/entradas/entrada_gprof.txt -o $(TEMP)/saidas/saida_gprof.txt
+	gprof $(EXE) gmon.out > $(REGPERF)/bigInputGPROF.txt
 
 clean:
 	rm -f $(EXE) $(OBJS) gmon.out

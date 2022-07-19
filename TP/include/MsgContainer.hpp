@@ -33,10 +33,22 @@ class MsgContainer{
 			return os;
 		}
 
-		bool operator<(const MsgContainer& outro) const { return getMessageID() < outro.getMessageID(); }
-		bool operator>(const MsgContainer& outro) const { return getMessageID() > outro.getMessageID(); }
-		bool operator<=(const MsgContainer& outro) const { return getMessageID() <= outro.getMessageID(); }
-		bool operator>=(const MsgContainer& outro) const { return getMessageID() >= outro.getMessageID(); }
+		bool operator<(const MsgContainer& outro) const { 
+			bool equal = getMessageID() == outro.getMessageID();
+			return(equal) ? getDestinatario() < outro.getDestinatario() : getMessageID() < outro.getMessageID(); 
+		}
+		bool operator>(const MsgContainer& outro) const { 
+			bool equal = getMessageID() == outro.getMessageID();
+			return(equal) ? getDestinatario() > outro.getDestinatario() : getMessageID() > outro.getMessageID(); 
+		}
+		bool operator<=(const MsgContainer& outro) const { 
+			bool equal = getMessageID() == outro.getMessageID();
+			return(equal) ? getDestinatario() <= outro.getDestinatario() : getMessageID() <= outro.getMessageID(); 
+		}
+		bool operator>=(const MsgContainer& outro) const { 
+			bool equal = getMessageID() == outro.getMessageID();
+			return(equal) ? getDestinatario() >= outro.getDestinatario() : getMessageID() >= outro.getMessageID(); 
+		}
 		bool operator==(const MsgContainer& outro) const { return getMessageID() == outro.getMessageID() && getDestinatario() == outro.getDestinatario(); }
 };
 
