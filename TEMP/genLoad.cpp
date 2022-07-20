@@ -70,41 +70,44 @@ void execute(int number, int hashsize, int nofwords, int nofusers, char* name, i
 int main(void){
 
 	// Gráfico de acessos
-	execute(1000,50,10,200,(char*)"entradas/regmem_load.txt");
+	// execute(1000,50,10,200,(char*)"entradas/regmem_load.txt");
 
-	execute(10000,500,10,200,(char*)"entradas/out_numusers_1.txt");
-	execute(10000,500,10,400,(char*)"entradas/out_numusers_2.txt");
-	execute(10000,500,10,600,(char*)"entradas/out_numusers_3.txt");
-	execute(10000,500,10,800,(char*)"entradas/out_numusers_4.txt");
-	execute(10000,500,10,1000,(char*)"entradas/out_numusers_5.txt");
+	// Gprof
+	execute(100000,50,10,200,(char*)"entradas/gprof_load.txt");
 
-	execute(100000,50,10,200,(char*)"entradas/out_1.txt");
-	execute(200000,50,10,200,(char*)"entradas/out_2.txt");
-	execute(300000,50,10,200,(char*)"entradas/out_3.txt");
-	execute(400000,50,10,200,(char*)"entradas/out_4.txt");
-	execute(500000,50,10,200,(char*)"entradas/out_5.txt");
+	// execute(10000,500,10,200,(char*)"entradas/out_numusers_1.txt");
+	// execute(10000,500,10,400,(char*)"entradas/out_numusers_2.txt");
+	// execute(10000,500,10,600,(char*)"entradas/out_numusers_3.txt");
+	// execute(10000,500,10,800,(char*)"entradas/out_numusers_4.txt");
+	// execute(10000,500,10,1000,(char*)"entradas/out_numusers_5.txt");
 
-	execute(10000,50,10,200,(char*)"entradas/out_msgsize_1.txt",0,0);
-	execute(10000,50,100,200,(char*)"entradas/out_msgsize_2.txt",0,0);
-	execute(10000,50,1000,200,(char*)"entradas/out_msgsize_3.txt",0,0);
-	execute(10000,50,10000,200,(char*)"entradas/out_msgsize_4.txt",0,0);
-	execute(10000,50,100000,200,(char*)"entradas/out_msgsize_5.txt",0,0);
+	// execute(100000,50,10,200,(char*)"entradas/out_1.txt");
+	// execute(200000,50,10,200,(char*)"entradas/out_2.txt");
+	// execute(300000,50,10,200,(char*)"entradas/out_3.txt");
+	// execute(400000,50,10,200,(char*)"entradas/out_4.txt");
+	// execute(500000,50,10,200,(char*)"entradas/out_5.txt");
 
-	execute(10000,50,10,200,(char*)"entradas/out_variancia_10-10_1.txt",10,10);
-	execute(20000,50,10,200,(char*)"entradas/out_variancia_10-10_2.txt",10,10);
-	execute(30000,50,10,200,(char*)"entradas/out_variancia_10-10_3.txt",10,10);
-	execute(40000,50,10,200,(char*)"entradas/out_variancia_10-10_4.txt",10,10);
-	execute(50000,50,10,200,(char*)"entradas/out_variancia_10-10_5.txt",10,10);
+	// execute(10000,50,10,200,(char*)"entradas/out_msgsize_1.txt",0,0);
+	// execute(10000,50,100,200,(char*)"entradas/out_msgsize_2.txt",0,0);
+	// execute(10000,50,1000,200,(char*)"entradas/out_msgsize_3.txt",0,0);
+	// execute(10000,50,10000,200,(char*)"entradas/out_msgsize_4.txt",0,0);
+	// execute(10000,50,100000,200,(char*)"entradas/out_msgsize_5.txt",0,0);
 
-	execute(10000,50,10,200,(char*)"entradas/out_variancia_100-0_1.txt",100,0);
-	execute(20000,50,10,200,(char*)"entradas/out_variancia_100-0_2.txt",100,0);
-	execute(30000,50,10,200,(char*)"entradas/out_variancia_100-0_3.txt",100,0);
-	execute(40000,50,10,200,(char*)"entradas/out_variancia_100-0_4.txt",100,0);
-	execute(50000,50,10,200,(char*)"entradas/out_variancia_100-0_5.txt",100,0);
+	// execute(10000,50,10,200,(char*)"entradas/out_variancia_10-10_1.txt",10,10);
+	// execute(20000,50,10,200,(char*)"entradas/out_variancia_10-10_2.txt",10,10);
+	// execute(30000,50,10,200,(char*)"entradas/out_variancia_10-10_3.txt",10,10);
+	// execute(40000,50,10,200,(char*)"entradas/out_variancia_10-10_4.txt",10,10);
+	// execute(50000,50,10,200,(char*)"entradas/out_variancia_10-10_5.txt",10,10);
 
-	execute(10000,50,10,200,(char*)"entradas/out_variancia_0-100_1.txt",0,100);
-	execute(20000,50,10,200,(char*)"entradas/out_variancia_0-100_2.txt",0,100);
-	execute(30000,50,10,200,(char*)"entradas/out_variancia_0-100_3.txt",0,100);
-	execute(40000,50,10,200,(char*)"entradas/out_variancia_0-100_4.txt",0,100);
-	execute(50000,50,10,200,(char*)"entradas/out_variancia_0-100_5.txt",0,100);
+	// execute(10000,50,10,200,(char*)"entradas/out_variancia_100-0_1.txt",100,0);
+	// execute(20000,50,10,200,(char*)"entradas/out_variancia_100-0_2.txt",100,0);
+	// execute(30000,50,10,200,(char*)"entradas/out_variancia_100-0_3.txt",100,0);
+	// execute(40000,50,10,200,(char*)"entradas/out_variancia_100-0_4.txt",100,0);
+	// execute(50000,50,10,200,(char*)"entradas/out_variancia_100-0_5.txt",100,0);
+
+	// execute(10000,50,10,200,(char*)"entradas/out_variancia_0-100_1.txt",0,100);
+	// execute(20000,50,10,200,(char*)"entradas/out_variancia_0-100_2.txt",0,100);
+	// execute(30000,50,10,200,(char*)"entradas/out_variancia_0-100_3.txt",0,100);
+	// execute(40000,50,10,200,(char*)"entradas/out_variancia_0-100_4.txt",0,100);
+	// execute(50000,50,10,200,(char*)"entradas/out_variancia_0-100_5.txt",0,100);
 }
